@@ -29,11 +29,23 @@ describe("Game", function() {
       }).toThrow(new Error("Invalid move"))
     });
 
-    it("should create return a winner", function() {
-      game.play(0, 0)
-      game.play(1, 1)
-      
+    it("should return 'X' as the winner", function() {
+      game.play(0, 0);
+      game.play(0, 1);
+      game.play(1, 1);
+      game.play(0, 2);
+
       expect(game.play(2, 2)).toEqual("X wins! GAME OVER!")
+    });
+
+    it("should return 'O' as the winner", function() {
+      game.play(0, 0);
+      game.play(0, 2);
+      game.play(0, 1);
+      game.play(1, 2);
+      game.play(1, 1);
+
+      expect(game.play(2, 2)).toEqual("O wins! GAME OVER!")
     });
   });
 

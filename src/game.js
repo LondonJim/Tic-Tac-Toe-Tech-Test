@@ -20,6 +20,7 @@ Game.prototype.play = function(y, x) {
   }
   this._displayBoard();
   this._checks(this._currentPlayer);
+  this._swapPlayers();
   return this._gameNotifier
 };
 
@@ -55,4 +56,14 @@ Game.prototype._checks = function() {
   this._winCheck(3,6,9);
   this._winCheck(1,5,9);
   this._winCheck(3,5,7);
+};
+
+Game.prototype._swapPlayers = function() {
+  if (this._currentPlayer === "O") {
+    this._currentPlayer = "X"
+    this._currentScore = this._playerOneScore
+  } else {
+      this._currentPlayer = "O"
+      this._currentScore = this._playerTwoScore
+  };
 };
