@@ -20,4 +20,14 @@ describe("Game", function() {
     expect(game._currentPlayer).toEqual("X")
   });
 
+  describe("#play", function() {
+
+    it("throws error if coordinates are already taken", function() {
+      game.play(1, 1);
+      expect(function() {
+        game.play(1, 1)
+      }).toThrow(new Error("Invalid move"))
+    });
+  });
+
 });
