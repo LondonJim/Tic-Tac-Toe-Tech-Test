@@ -47,6 +47,14 @@ describe("Game", function() {
 
       expect(game.play(2, 2)).toEqual("O wins! GAME OVER!")
     });
+
+    it("should return a draw message on a draw", function() {
+      game.play(1, 1); game.play(0, 0); game.play(2, 0);
+      game.play(0, 2); game.play(0, 1); game.play(2, 1);
+      game.play(1, 2); game.play(1, 0);
+
+      expect(game.play(2, 2)).toEqual("Draw! GAME OVER!")
+    });
   });
 
 });

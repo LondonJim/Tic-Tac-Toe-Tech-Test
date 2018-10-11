@@ -56,6 +56,7 @@ Game.prototype._checks = function() {
   this._winCheck(3,6,9);
   this._winCheck(1,5,9);
   this._winCheck(3,5,7);
+  this._draw()
 };
 
 Game.prototype._swapPlayers = function() {
@@ -67,3 +68,9 @@ Game.prototype._swapPlayers = function() {
       this._currentScore = this._playerTwoScore
   };
 };
+
+Game.prototype._draw = function() {
+  if (this._playerOneScore.length + this._playerTwoScore.length === 9) {
+    this._gameNotifier = ("Draw! GAME OVER!")
+  }
+}
