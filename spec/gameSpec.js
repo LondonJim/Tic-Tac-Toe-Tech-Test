@@ -28,6 +28,13 @@ describe("Game", function() {
         game.play(1, 1)
       }).toThrow(new Error("Invalid move"))
     });
+
+    it("should create return a winner", function() {
+      game.play(0, 0)
+      game.play(1, 1)
+      
+      expect(game.play(2, 2)).toEqual("X wins! GAME OVER!")
+    });
   });
 
 });
