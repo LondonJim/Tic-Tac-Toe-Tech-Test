@@ -1,36 +1,9 @@
 function Game() {
+  this._scoreBoard = [[1,2,3],
+                      [4,5,6],
+                      [7,8,9]];
+  this._board = [[" "," "," "],
+                 [" "," "," "],
+                 [" "," "," "]];
+  this._currentPlayer = "X";
 }
-
-Game.prototype.play = function() {
-  return [[" "," "," "],
-          [" "," "," "],
-          [" "," "," "]]
-}
-
-
-
-
-
-
-// function Player() {
-// }
-// Player.prototype.play = function(song) {
-//   this.currentlyPlayingSong = song;
-//   this.isPlaying = true;
-// };
-//
-// Player.prototype.pause = function() {
-//   this.isPlaying = false;
-// };
-//
-// Player.prototype.resume = function() {
-//   if (this.isPlaying) {
-//     throw new Error("song is already playing");
-//   }
-//
-//   this.isPlaying = true;
-// };
-//
-// Player.prototype.makeFavorite = function() {
-//   this.currentlyPlayingSong.persistFavoriteStatus(true);
-// };
