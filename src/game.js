@@ -1,14 +1,14 @@
-function Game() {
+function Game(playerOne = new Player("X"),
+              playerTwo = new Player("O")) {
   this._scoreBoard = [[1,2,3],
                       [4,5,6],
                       [7,8,9]];
   this._board = [[" "," "," "],
                  [" "," "," "],
                  [" "," "," "]];
-  this._currentPlayer = "X";
-  this._playerOneScore = [];
-  this._playerTwoScore = [];
-  this._currentScore = this._playerOneScore;
+  this._playerOne = playerOne
+  this._playerTwo = playerTwo
+  this._currentPlayer = this._playerOne
   this._gameNotifier = ""
 };
 
@@ -25,8 +25,8 @@ Game.prototype.play = function(y, x) {
 };
 
 Game.prototype._move = function(x, y) {
-  this._board[x][y] = this._currentPlayer;
-  this._currentScore.push(this._scoreBoard[x][y]);
+  this._board[x][y] = this._currentPlayer.type;
+  this._currentPlayer.score.push(this._scoreBoard[x][y]);
 };
 
 Game.prototype._validMoveCheck = function(x, y) {
@@ -40,10 +40,10 @@ Game.prototype._displayBoard = function () {
 };
 
 Game.prototype._winCheck = function(pos1, pos2 ,pos3) {
-  if (this._currentScore.includes(pos1) &&
-      this._currentScore.includes(pos2) &&
-      this._currentScore.includes(pos3)) {
-  this._gameNotifier = `${this._currentPlayer} wins! GAME OVER!`;
+  if (this._currentPlayer.score.includes(pos1) &&
+      this._currentPlayer.score.includes(pos2) &&
+      this._currentPlayer.score.includes(pos3)) {
+  this._gameNotifier = `${this._currentPlayer.type} wins! GAME OVER!`;
   };
 };
 
@@ -60,17 +60,15 @@ Game.prototype._checks = function() {
 };
 
 Game.prototype._swapPlayers = function() {
-  if (this._currentPlayer === "O") {
-    this._currentPlayer = "X"
-    this._currentScore = this._playerOneScore
+  if (this._currentPlayer === this._playerTwo) {
+    this._currentPlayer = this._playerOne
   } else {
-      this._currentPlayer = "O"
-      this._currentScore = this._playerTwoScore
+    this._currentPlayer = this._playerTwo
   };
 };
 
 Game.prototype._draw = function() {
-  if (this._playerOneScore.length + this._playerTwoScore.length === 9) {
+  if (this._playerOne.score.length + this._playerTwo.score.length === 9) {
     this._gameNotifier = ("Draw! GAME OVER!")
   }
 }

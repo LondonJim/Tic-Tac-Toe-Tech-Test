@@ -1,7 +1,18 @@
 describe("Game", function() {
 
+  var playerOne;
+  var playerTwo;
+
   beforeEach(function() {
-    game = new Game
+    playerOne = jasmine.createSpyObj('playerOne', ['type', 'score'])
+    playerTwo = jasmine.createSpyObj('playerOne', ['type', 'score'])
+
+    playerOne.type = "X"
+    playerTwo.type = "O"
+    playerOne.score = []
+    playerTwo.score = []
+
+    game = new Game(playerOne, playerTwo)
   });
 
   it("should create a 3x3 2d array", function() {
@@ -16,34 +27,26 @@ describe("Game", function() {
                                       [7,8,9]])
   });
 
-  it("should create a current player variable", function() {
-    expect(game._currentPlayer).toEqual("X")
-  });
-
   describe("#play", function() {
 
     it("throws error if coordinates are already taken", function() {
       game.play(1, 1);
+
       expect(function() {
         game.play(1, 1)
       }).toThrow(new Error("Invalid move"))
     });
 
     it("should return 'X' as the winner", function() {
-      game.play(0, 0);
-      game.play(0, 1);
-      game.play(1, 1);
+      game.play(0, 0); game.play(0, 1); game.play(1, 1);
       game.play(0, 2);
 
       expect(game.play(2, 2)).toEqual("X wins! GAME OVER!")
     });
 
     it("should return 'O' as the winner", function() {
-      game.play(0, 0);
-      game.play(0, 2);
-      game.play(0, 1);
-      game.play(1, 2);
-      game.play(1, 1);
+      game.play(0, 0); game.play(0, 2); game.play(0, 1);
+      game.play(1, 2); game.play(1, 1);
 
       expect(game.play(2, 2)).toEqual("O wins! GAME OVER!")
     });
